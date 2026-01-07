@@ -3,236 +3,645 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>静夜思 - 现代化酷炫展示</title>
+    <title>Nexus | 简约现代化设计</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* 基础样式重置 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #f9f9f9;
+            --dark-color: #1a1a1a;
+            --gray-color: #7f8c8d;
+            --border-color: #ecf0f1;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
         }
         
         body {
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            color: #fff;
-            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
         
-        /* 星空背景 */
-        .stars {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .container {
             width: 100%;
-            height: 100%;
-            z-index: -1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
         
-        .star {
-            position: absolute;
-            background-color: #fff;
-            border-radius: 50%;
-            animation: twinkle var(--duration, 3s) infinite ease-in-out;
-            opacity: var(--opacity, 0.7);
-        }
-        
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.2; }
-            50% { opacity: var(--opacity, 0.7); }
-        }
-        
-        /* 诗歌容器 */
-        .poem-container {
-            background: rgba(10, 10, 20, 0.7);
+        /* 导航栏样式 */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 800px;
-            width: 90%;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 16px;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            bottom: -5px;
+            left: 0;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+        
+        /* 主内容区样式 */
+        main {
+            margin-top: 80px;
+        }
+        
+        /* 英雄区域 */
+        .hero {
+            padding: 100px 0;
+            display: flex;
+            align-items: center;
+            min-height: 90vh;
+        }
+        
+        .hero-content {
+            flex: 1;
+            padding-right: 50px;
+        }
+        
+        .hero-image {
+            flex: 1;
             text-align: center;
-            box-shadow: 0 0 30px rgba(100, 150, 255, 0.3);
-            border: 1px solid rgba(100, 150, 255, 0.2);
-            position: relative;
-            overflow: hidden;
         }
         
-        .poem-container::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #ff0080, #00d2ff, #00ff87, #ff0080);
-            background-size: 400%;
-            z-index: -1;
-            border-radius: 22px;
-            animation: borderAnimation 8s linear infinite;
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
         }
         
-        @keyframes borderAnimation {
-            0% { background-position: 0 0; }
-            100% { background-position: 400% 0; }
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--primary-color);
         }
         
-        /* 标题 */
-        .title {
-            font-size: 2.8rem;
+        .hero p {
+            font-size: 18px;
+            color: var(--gray-color);
             margin-bottom: 30px;
-            text-shadow: 0 0 15px rgba(0, 210, 255, 0.7);
-            letter-spacing: 3px;
-            position: relative;
+            max-width: 500px;
+        }
+        
+        .btn {
             display: inline-block;
+            padding: 15px 30px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
         }
         
-        .title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #00d2ff, transparent);
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.2);
         }
         
-        /* 诗歌内容 */
-        .poem {
-            font-size: 1.8rem;
-            line-height: 2.2;
-            margin: 30px 0;
-            text-shadow: 0 0 10px rgba(100, 200, 255, 0.5);
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            margin-left: 15px;
         }
         
-        .poem-line {
-            margin: 15px 0;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s forwards;
+        .btn-outline:hover {
+            background-color: var(--secondary-color);
+            color: white;
         }
         
-        .poem-line:nth-child(1) { animation-delay: 0.2s; }
-        .poem-line:nth-child(2) { animation-delay: 0.4s; }
-        .poem-line:nth-child(3) { animation-delay: 0.6s; }
-        .poem-line:nth-child(4) { animation-delay: 0.8s; }
-        
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* 特性区域 */
+        .features {
+            padding: 100px 0;
+            background-color: #f5f7fa;
         }
         
-        /* 作者信息 */
-        .author {
-            font-size: 1.4rem;
-            margin-top: 30px;
-            color: #8a8aff;
-            font-style: italic;
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
         }
         
-        /* 月亮装饰 */
-        .moon {
-            position: absolute;
-            top: 20%;
-            right: 10%;
-            width: 80px;
-            height: 80px;
-            background: radial-gradient(circle at 30% 30%, #f9f3d0, #ffd700);
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: var(--gray-color);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(52, 152, 219, 0.1);
             border-radius: 50%;
-            box-shadow: 0 0 40px #ffd700, 0 0 80px rgba(255, 215, 0, 0.5);
-            animation: float 8s infinite ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
         }
         
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+        .feature-icon i {
+            font-size: 30px;
+            color: var(--secondary-color);
+        }
+        
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        /* 项目展示区 */
+        .portfolio {
+            padding: 100px 0;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .portfolio-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .portfolio-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .portfolio-info {
+            padding: 25px;
+            background-color: white;
+        }
+        
+        .portfolio-info h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        /* 页脚样式 */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 70px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            color: white;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 15px;
+            color: white;
+            font-size: 18px;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bdc3c7;
+            font-size: 14px;
         }
         
         /* 响应式设计 */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 60px 0;
+            }
+            
+            .hero-content {
+                padding-right: 0;
+                margin-bottom: 50px;
+            }
+            
+            .hero h1 {
+                font-size: 40px;
+            }
+        }
+        
         @media (max-width: 768px) {
-            .poem-container {
-                padding: 25px;
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                box-shadow: var(--shadow);
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: var(--transition);
+                visibility: hidden;
             }
             
-            .title {
-                font-size: 2.2rem;
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
             }
             
-            .poem {
-                font-size: 1.4rem;
-                line-height: 1.8;
+            .nav-links li {
+                margin: 15px 0;
             }
             
-            .author {
-                font-size: 1.2rem;
+            .mobile-menu-btn {
+                display: block;
             }
             
-            .moon {
-                width: 60px;
-                height: 60px;
-                top: 15%;
-                right: 5%;
+            .hero h1 {
+                font-size: 34px;
+            }
+            
+            .btn-container {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+            
+            .feature-card, .portfolio-item {
+                padding: 30px 20px;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- 星空背景 -->
-    <div class="stars" id="stars"></div>
-    
-    <!-- 月亮装饰 -->
-    <div class="moon"></div>
-    
-    <!-- 诗歌容器 -->
-    <div class="poem-container">
-        <h1 class="title">静夜思</h1>
-        <div class="poem">
-            <div class="poem-line">床前明月光，</div>
-            <div class="poem-line">疑是地上霜。</div>
-            <div class="poem-line">举头望明月，</div>
-            <div class="poem-line">低头思故乡。</div>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Nex<span>us</span></a>
+                <ul class="nav-links">
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#features">特性</a></li>
+                    <li><a href="#portfolio">作品</a></li>
+                    <li><a href="#about">关于</a></li>
+                    <li><a href="#contact">联系</a></li>
+                </ul>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
         </div>
-        <div class="author">—— 李白</div>
-    </div>
+    </header>
+
+    <main>
+        <!-- 英雄区域 -->
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>简约设计，卓越体验</h1>
+                    <p>我们专注于创造现代化、简约大气且功能强大的数字解决方案，为用户提供卓越的体验和无缝的交互设计。</p>
+                    <div class="btn-container">
+                        <a href="#contact" class="btn">开始项目</a>
+                        <a href="#portfolio" class="btn btn-outline">查看作品</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1558655146-364adaf1fcc9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="现代化设计示例">
+                </div>
+            </div>
+        </section>
+
+        <!-- 特性区域 -->
+        <section class="features" id="features">
+            <div class="container">
+                <div class="section-title">
+                    <h2>我们的核心特性</h2>
+                    <p>我们提供一系列经过精心设计的特性，确保每个项目都能达到最高标准</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h3>现代化设计</h3>
+                        <p>采用最新设计趋势，创建美观且功能强大的界面，专注于用户体验和视觉层次。</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>完全响应式</h3>
+                        <p>所有设计均适配各种屏幕尺寸，从手机到桌面设备，确保一致的用户体验。</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>高性能</h3>
+                        <p>优化代码和资源，确保快速加载时间和平滑的交互，提升用户满意度。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 项目展示区 -->
+        <section class="portfolio" id="portfolio">
+            <div class="container">
+                <div class="section-title">
+                    <h2>精选项目</h2>
+                    <p>探索我们最近完成的成功案例，每个项目都体现了我们对细节的关注和创新精神</p>
+                </div>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="金融科技仪表板" class="portfolio-img">
+                        <div class="portfolio-info">
+                            <h3>金融科技仪表板</h3>
+                            <p>为金融科技公司设计的现代化数据可视化界面，提供实时分析和洞察。</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w-800&q=80" alt="电子商务平台" class="portfolio-img">
+                        <div class="portfolio-info">
+                            <h3>电子商务平台</h3>
+                            <p>简洁直观的在线购物体验，优化了转化率和用户参与度。</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="健康管理应用" class="portfolio-img">
+                        <div class="portfolio-info">
+                            <h3>健康管理应用</h3>
+                            <p>直观的健康追踪应用，帮助用户管理日常活动和健康目标。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>关于我们</h3>
+                    <p>我们是一支专注于现代化设计的团队，致力于通过简约大气的解决方案帮助客户实现业务目标。</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>快速链接</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">首页</a></li>
+                        <li><a href="#features">特性</a></li>
+                        <li><a href="#portfolio">作品</a></li>
+                        <li><a href="#about">关于</a></li>
+                        <li><a href="#contact">联系</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>联系我们</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> 上海市浦东新区科技园</li>
+                        <li><i class="fas fa-phone"></i> +86 21 1234 5678</li>
+                        <li><i class="fas fa-envelope"></i> info@nexus-design.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Nexus Design. 保留所有权利。</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        // 创建星空背景
-        document.addEventListener('DOMContentLoaded', () => {
-            const starsContainer = document.getElementById('stars');
-            const starCount = 150;
-            
-            for (let i = 0; i < starCount; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star');
+        // 移动端菜单切换
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+            this.querySelector('i').classList.toggle('fa-bars');
+            this.querySelector('i').classList.toggle('fa-times');
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
                 
-                // 随机位置
-                const x = Math.random() * 100;
-                const y = Math.random() * 100;
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
                 
-                // 随机大小
-                const size = Math.random() * 3;
-                
-                // 随机不透明度
-                const opacity = 0.2 + Math.random() * 0.8;
-                
-                // 随机动画持续时间
-                const duration = 2 + Math.random() * 5;
-                
-                star.style.left = `${x}%`;
-                star.style.top = `${y}%`;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.setProperty('--opacity', opacity);
-                star.style.setProperty('--duration', `${duration}s`);
-                
-                starsContainer.appendChild(star);
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    // 关闭移动端菜单
+                    document.querySelector('.nav-links').classList.remove('active');
+                    document.querySelector('.mobile-menu-btn i').classList.remove('fa-times');
+                    document.querySelector('.mobile-menu-btn i').classList.add('fa-bars');
+                    
+                    // 滚动到目标位置
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // 滚动时添加导航栏阴影
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = 'var(--shadow)';
             }
+        });
+        
+        // 页面加载时显示淡入效果
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
         });
     </script>
 </body>
